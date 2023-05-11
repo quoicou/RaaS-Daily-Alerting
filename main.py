@@ -152,7 +152,8 @@ def envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode
     i = 0
 
     date_format_mail = date_amj_to_jma(date)
-    date_format_mail_fin_periode = date_amj_to_jma(date_fin_periode)
+    if date_fin_periode != 0:
+        date_format_mail_fin_periode = date_amj_to_jma(date_fin_periode)
 
     message = MIMEMultipart()
 
@@ -165,7 +166,7 @@ def envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode
         message["Subject"] = f'Bilan Ransomware - {date_format_mail}'
 
     if nb_raas == 0:
-        msg = f"Depuis début {str(date_aaaa_mm_jj())[:4]}, il y a eu {nb_raas_annee} attaques par ransomware revendiquées\n\nCependant, aujourd'hui aucune attaque n'a été revendiquée le {date_format_mail}."
+        msg = f"Depuis début {str(date_aaaa_mm_jj())[:4]}, il y a eu {nb_raas_annee} attaques par ransomware revendiquées.<br><br>Cependant, aujourd'hui aucune attaque n'a été revendiquée le {date_format_mail}."
 
     else:
         if choix == 3:
@@ -179,7 +180,7 @@ def envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode
 
         msg += "</tbody></table>"
 
-        msg += f"<br>PS : Depuis début {str(date_aaaa_mm_jj())[:4]}, il y a eu {nb_raas_annee} attaques par ransomware revendiquées dans le monde<br><br>N'hésitez pas à nous faire vos retours, cela améliorera l'algorithme<br><br>Cordialement l'outil de monitoring du pôle IT Alcyconie by Juniors<br>"
+        msg += f"<br>PS : Depuis début {str(date_aaaa_mm_jj())[:4]}, il y a eu {nb_raas_annee} attaques par ransomware revendiquées dans le monde<br><br>N'hésitez pas à nous faire vos retours, cela améliorera l'algorithme !<br><br>Cordialement l'outil de monitoring du pôle IT Alcyconie by Juniors<br>"
 
     messageText = MIMEText(msg, 'html')
 
@@ -188,7 +189,7 @@ def envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode
     email = 'INSERER MAIL'
     password = 'INSERER PSWD'
 
-    server = smtplib.SMTP('smtp.gmail.com:INSRER PORT')
+    server = smtplib.SMTP('smtp.gmail.com:587')
     server.ehlo('Gmail')
     server.starttls()
     server.login(email, password)

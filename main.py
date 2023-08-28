@@ -202,7 +202,6 @@ def envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode
 
     server.quit()
 
-
 if __name__ == '__main__':
     choix = start()
     liste_donnees = scrapping_raas()
@@ -214,6 +213,5 @@ if __name__ == '__main__':
         envoi_mail(nb_raas, liste_raas, date, nb_raas_annee, choix, date_fin_periode)
 
 # Ajout dans CaillouNoir
-# choix mail : 1) alcyonie all ou autre mail
-# Ajout schéma des 10 plus gros groupes de l'année genre camembert
+# Ajout schéma des 10 plus gros groupes de l'année - camembert
 # Ajout nb_raas par groupe sur l'année ou mois
